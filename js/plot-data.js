@@ -53,7 +53,7 @@ function plotBars(data, divId, width, height) {
         });
 }
 
-function plotCalendar(dateText,monthText, divId, width, height){
+function plotCalendar(dateText,monthText, divId, width){
     // var parseTime = d3.timeParse("%e %B"),
     //     date = parseTime(dateText + " " + monthText);
     // console.log(date);
@@ -61,16 +61,48 @@ function plotCalendar(dateText,monthText, divId, width, height){
     // Construct 28 day grid
     var dates = Array.from({ length: 28 }, (x, i) => i+1);
     // console.log(dates);
-    var width = 500,
-        spacing = 1.1,
-        daySquareLength = 25;
+    var spacing = 1,
+        daySquareLength = 25,
+        rounding = 0.4,
+        borderGapOutside = 20,
+        width = daySquareLength * spacing * 7 + borderGapOutside;
 
-    var graph = d3.select("body")
+    var height = daySquareLength * spacing * 5 + borderGapOutside/2;
+    var svg = d3.select("body")
         .append("svg")
         .attr("width", width)
-        .attr("height", daySquareLength * dates.length);
+        .attr("height", height);
+    
+    var border = svg.append("g")
+        .attr("id","calendar-border");
+    
+    border.append("text")
+        .attr("x",width/2 + borderGapOutside/2)
+        .attr("y",15)
+        .text(monthText)
+        .attr("class","month");
+    
+    // Draw box around whole thing.
+    border.append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("rx", daySquareLength * rounding)
+        .attr("ry", daySquareLength * rounding)
+        .attr("class","outside-line");
+    // Draw box around dates
+    border.append("rect")
+        .attr("width", daySquareLength * spacing * 7)
+        .attr("height", daySquareLength * spacing * 4)
+        .attr("rx", daySquareLength * rounding)
+        .attr("ry", daySquareLength * rounding)
+        .attr("class", "date-line")
+        .attr("transform", "translate("+borderGapOutside/2+"," + daySquareLength + ")");
+    
+    var dateDisplay = border.append("g")
+        .attr("class","date-display")
+        .attr("transform","translate("+borderGapOutside/2+","+daySquareLength+")" );
 
-    var dateSquareGroups = graph.selectAll("g")
+    var dateSquareGroups = dateDisplay.selectAll("g")
         .data(dates)
         .enter()
         .append("g")
@@ -85,7 +117,9 @@ function plotCalendar(dateText,monthText, divId, width, height){
 
     dateSquareGroups.append("rect")
         .attr("width", daySquareLength)
-        .attr("height", daySquareLength);
+        .attr("height", daySquareLength)
+        .attr("rx",daySquareLength*rounding)
+        .attr("ry",daySquareLength*rounding);
 
     dateSquareGroups.append("text")
         .attr("x", daySquareLength/2 + 5)

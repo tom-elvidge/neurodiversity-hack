@@ -1,9 +1,19 @@
+svg .date-display rect {
+    fill: rgb(0, 255, 234);
+}
+svg .date-line, svg .outside-line {
+    stroke: black;
+}
 svg rect {
-    fill: orange;
+    fill: none;
+    stroke:none;
 }
 
 svg text {
     fill:white;
     font: 10px sans-serif;
     text-anchor: end;
+}
+.month {
+    fill: black;
 }
