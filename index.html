@@ -17,15 +17,10 @@
 </head>
 
 <body>
-    
-    <div id="bar-example"></div>
-    <div id="cal-example"></div>
-    <p>Test Text</p>
 
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="js/plot-data.js"></script>
     <!-- <script>plotBars(labelData, "#bar-example", 960, 500)</script> -->
-    <script>plotCalendar("7","March")</script>
     <nav class="navbar navbar-expand-lg"
         style="justify-content: flex-start; background-color: #0F2080; position: relative;">
         <a class="navbar-brand" href="#" style="margin: 10px;">
@@ -66,11 +61,8 @@
         <div class="row">
             <div class="col-10" style="background-color: wheat; height: 350px;">
                 <h1>Calendar</h1>
-                <div id="cal-heatmap"></div>
-                <script type="text/javascript">
-                    var cal = new CalHeatMap();
-                    cal.init({});
-                </script>
+                <script>plotCalendar("7","March")</script>
+                <div id="cal-example"></div>
             </div>
             <div class="col-2"></div>
         </div>
