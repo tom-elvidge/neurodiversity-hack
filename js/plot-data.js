@@ -1,10 +1,10 @@
-d3.select("p").style("color", "green");
-d3.select("body").append("p").text("Third paragraph.");
-// d3.select("body").append("p").text("Hey Tom");
+// d3.select("p").style("color", "green");
+// d3.select("body").append("p").text("Third paragraph.");
+// // d3.select("body").append("p").text("Hey Tom");
 
-var circle = d3.selectAll("circle");
-circle.data([32, 57, 112]);
-circle.attr("r", function (d) { return Math.sqrt(d); });
+// var circle = d3.selectAll("circle");
+// circle.data([32, 57, 112]);
+// circle.attr("r", function (d) { return Math.sqrt(d); });
 
 
 function plotBars(data, divId, width, height) {
@@ -51,4 +51,54 @@ function plotBars(data, divId, width, height) {
         .attr("height", function (d) {
             return height - yScale(d.val);
         });
+}
+
+function plotCalendar(dateText,monthText, divId, width, height){
+    // var parseTime = d3.timeParse("%e %B"),
+    //     date = parseTime(dateText + " " + monthText);
+    // console.log(date);
+
+    // Construct 28 day grid
+    var dates = Array.from({ length: 28 }, (x, i) => i+1);
+    // console.log(dates);
+    var width = 500,
+        spacing = 1.1,
+        daySquareLength = 25;
+
+    var graph = d3.select("body")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", daySquareLength * dates.length);
+
+    var dateSquareGroups = graph.selectAll("g")
+        .data(dates)
+        .enter()
+        .append("g")
+        .attr("id", function (d) {
+            return "day-" + d;
+        })
+        // Hide all of these groups - we unhide the one we want
+        .attr("visibility", "hidden")
+        .attr("transform", function (d, i) {
+            return "translate("+i %7  * daySquareLength*spacing + "," + Math.floor(i/7) * daySquareLength*spacing + ")";
+        });
+
+    dateSquareGroups.append("rect")
+        .attr("width", daySquareLength)
+        .attr("height", daySquareLength);
+
+    dateSquareGroups.append("text")
+        .attr("x", daySquareLength/2 + 5)
+        .attr("y", daySquareLength / 2)
+        .text(function (d) { return d; });
+
+    // Only show the specified date
+    d3.select("#day-" + dateText).attr("visibility","visible");
+    
+    if (dateText == "29" || dateText == "30" || dateText == "31") {
+        // Show last day in month as that date
+        d3.select("#day-28").attr("visibility", "visible");
+        d3.select("#day-28").select("text").text(dateText);
+    }
+
 }
