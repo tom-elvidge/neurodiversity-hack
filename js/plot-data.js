@@ -6,10 +6,39 @@
 // circle.data([32, 57, 112]);
 // circle.attr("r", function (d) { return Math.sqrt(d); });
 
-var labelData = []
+// Global variables to store values from note text.
+var nums = []
+var dates = []
+var money = []
+
+function updateValues(text) {
+    // Plot all the dates.
+    dates = text.match(/\d+(st|th|rd) (January|February|March|April|May|June|July|August|September|October|November|December)/g)
+    console.log(dates)
+    // var i = 0
+    // if (dates != null) {
+    //     while (i < dates.length) {
+    //         plotCalendar(dates[i].match(/\d+/), dates[i].match(/(January|February|March|April|May|June|July|August|September|October|November|December)/, "cal-example", 300))
+    //         i++
+    //     }
+    // }
+
+    // Plot all the nums.
+    nums = text.match(/\d+/g)
+    console.log(nums)
+    // plotBars(nums, "bar-example", 300, 300)
+
+    money = text.match(/[€$£]\d+/g)
+    console.log(money)
+}
 
 function plotBars(data, divId, width, height) {
-    console.log(data)
+    data = [
+        {
+            label:"test",
+            val: 100
+        }
+    ]
     // Reset div
     d3.select(divId).selectAll("*").remove();
     // https://datawanderings.com/2019/10/20/tutorial-advanced-bar-chart-in-d3-js-v-5/
@@ -138,32 +167,34 @@ function plotCalendar(dateText,monthText, divId, width){
         d3.select("#day-28").attr("visibility", "visible");
         d3.select("#day-28").select("text").text(dateText);
     }
-
-function highlightNumbers(divId) {
-    // Get text from editable div.
-    var text = document.getElementById(divId).innerHTML
-    // Regex to get an array of all numbers in text.
-    nums = text.match(/\d+/g)
-    console.log(nums)
-    // Replace numbers on a copy of text.
-    var newtext = text
-    var i = 0
-    while (i < nums.length) {
-        // Replace number in text with a button with the same label.
-        numberButton = `<input type="button" value="${nums[i]}" onclick="addData(${nums[i]})">`
-        newtext = newtext.replace(nums[i], numberButton)
-        i++
-    }
-    // Update text div.
-    document.getElementById(divId).innerHTML = newtext
 }
 
-function addData(value) {
-    // Add data
-    labelData.push(
-        {
-            label: value,
-            val: value
-        }
-    )
-}}
+// function highlightNumbers(divId) {
+//     // Get text from editable div.
+//     var text = document.getElementById(divId).innerHTML
+//     // Regex to get an array of all numbers in text.
+//     nums = text.match(/\d+/g)
+//     console.log(nums)
+//     // Replace numbers on a copy of text.
+//     var newtext = text
+//     var i = 0
+//     while (i < nums.length) {
+//         // Replace number in text with a button with the same label.
+//         numberButton = `<input type="button" value="${nums[i]}" onclick="addData(${nums[i]})">`
+//         newtext = newtext.replace(nums[i], numberButton)
+//         i++
+//     }
+//     // Update text div.
+//     document.getElementById(divId).innerHTML = newtext
+// }
+
+// function addData(value) {
+//     // Add data
+//     labelData.push(
+//         {
+//             label: value,
+//             val: value
+//         }
+//     )
+// }}
+

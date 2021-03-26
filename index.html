@@ -20,7 +20,6 @@
 
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="js/plot-data.js"></script>
-    <!-- <script>plotBars(labelData, "#bar-example", 960, 500)</script> -->
     <nav class="navbar navbar-expand-lg"
         style="justify-content: flex-start; background-color: #0F2080; position: relative;">
         <a class="navbar-brand" href="#" style="margin: 10px;">
@@ -41,8 +40,10 @@
 
     <div class="container">
         <div class="container" style="margin: 2rem 0rem 2rem 0rem;">
-            <input class="form-control mr-sm-2" type="search" placeholder="My new note..." aria-label="Search"
-                style="width: 450px; margin: auto; background-color: #0F2080; color: white;">
+            <form id="new-note-form" >
+                <input id="new-note-input" class="form-control mr-sm-2" type="search" placeholder="My new note..." aria-label="Search"
+                    style="width: 450px; margin: auto; background-color: #0F2080; color: white;">
+            </form>
         </div>
 
 
@@ -63,10 +64,21 @@
                 <h1>Calendar</h1>
                 <script>plotCalendar("7","March")</script>
                 <div id="cal-example"></div>
+                <div id="bar-example">test</div>
             </div>
             <div class="col-2"></div>
         </div>
     </div>
+
+    <script>
+        function ehandler(event) {
+            event.preventDefault();
+            updateValues(document.getElementById("new-note-input").value)
+        }
+        const form = document.getElementById("new-note-form");
+        form.addEventListener("submit", ehandler);
+    </script>
+
 </body>
 
 </html>
