@@ -15,16 +15,19 @@
 
 <body>
     <div id="bar-example"></div>
-    <p>Test Text</p>
-    <svg width="720" height="120">
+    <!-- <svg width="720" height="120">
         <circle cx="40" cy="60" r="10"></circle>
         <circle cx="80" cy="60" r="10"></circle>
         <circle cx="120" cy="60" r="10"></circle>
-    </svg>
+    </svg> -->
+    <div id="text-input" contenteditable="true">
+        Replace 4234 text with 5325 a button please.
+    </div>
+    <input type="button" onclick='highlightNumbers("text-input")' value="Extract Numbers">
+    <input type="button" onclick='plotBars(labelData, "#bar-example", 960, 500)' value="Plot Bar">
     <script src="https://d3js.org/d3.v6.min.js"></script>
-    <script src="js/data.js"></script>
     <script src="js/plot-data.js"></script>
-    <script>plotBars(labelData, "#bar-example", 960, 500)</script>
+    <script>var labelData = []</script>
 </body>
 
 </html>
