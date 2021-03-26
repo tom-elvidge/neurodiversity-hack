@@ -1,16 +1,5 @@
-// var data = [30, 86, 168, 281, 303, 365];
-// d3.select(".chart")
-//     .selectAll("div")
-//     .data(data)
-//     .enter()
-//     .append("div")
-//     .style("width", function (d) { return d + "px"; })
-//     .text(function (d) { return d; });
+// d3.select("body").append("p").text("Hey Tom");
 
-// d3.create("span")
-//     .style("color", "white")
-//     .style("background-color", "black")
-//     .html("Hello, world!")
-//     .node();
-d3.select("p").style("color", "green");
-d3.select("body").append("p").text("Third paragraph.");
+var circle = d3.selectAll("circle");
+circle.data([32, 57, 112]);
+circle.attr("r", function (d) { return Math.sqrt(d); });
