@@ -52,3 +52,37 @@ function plotBars(data, divId, width, height) {
             return height - yScale(d.val);
         });
 }
+
+function plotPie(percentage, divId, width, height) {
+    
+    var data = [percentage, 100-percentage];
+
+    var svg = d3.select(divId).append("svg")
+    
+        radius = Math.min(width, height) / 2,
+        g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    var color = d3.scaleOrdinal(['#F5793A','#A95AA1','#85C0F9']);
+
+    // Generate the pie
+    var pie = d3.pie();
+
+    // Generate the arcs
+    var arc = d3.arc()
+                .innerRadius(0)
+                .outerRadius(radius);
+
+    //Generate groups
+    var arcs = g.selectAll("arc")
+                .data(pie(data))
+                .enter()
+                .append("g")
+                .attr("class", "arc")
+
+    //Draw arc paths
+    arcs.append("path")
+        .attr("fill", function(d, i) {
+            return color(i);
+        })
+        .attr("d", arc);
+}
