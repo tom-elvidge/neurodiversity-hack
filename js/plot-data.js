@@ -1,5 +1,11 @@
 d3.select("p").style("color", "green");
 d3.select("body").append("p").text("Third paragraph.");
+// d3.select("body").append("p").text("Hey Tom");
+
+var circle = d3.selectAll("circle");
+circle.data([32, 57, 112]);
+circle.attr("r", function (d) { return Math.sqrt(d); });
+
 
 function plotBars(data, divId, width, height) {
     // https://datawanderings.com/2019/10/20/tutorial-advanced-bar-chart-in-d3-js-v-5/
