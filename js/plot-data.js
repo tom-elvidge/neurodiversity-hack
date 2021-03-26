@@ -13,15 +13,18 @@ var money = []
 
 function updateValues(text) {
     // Plot all the dates.
-    dates = text.match(/\d+(st|th|rd) (January|February|March|April|May|June|July|August|September|October|November|December)/g)
-    console.log(dates)
-    // var i = 0
-    // if (dates != null) {
-    //     while (i < dates.length) {
-    //         plotCalendar(dates[i].match(/\d+/), dates[i].match(/(January|February|March|April|May|June|July|August|September|October|November|December)/, "cal-example", 300))
-    //         i++
-    //     }
-    // }
+    // dates = text.match(/\d+(st|th|rd) (January|February|March|April|May|June|July|August|September|October|November|December)/g)
+
+    let r1 = text.matchAll(/(?<day>\d+)\s?(?:st|th|rd)?\s(?<month>Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Oct|Nov|Dec)/gi);
+    for(let result of r1){
+        let {day, month} = result.groups;
+        plotCalendar(day,month);
+    }
+    let r2 = text.matchAll(/(?<day>\d+)\/(?<month>\d+)\/(?<year>\d+)/gi);
+    for (let result of r2) {
+        let { day, month } = result.groups;
+        plotCalendar(day, month);
+    }
 
     // Plot all the nums.
     nums = text.match(/\d+/g)
@@ -86,9 +89,9 @@ function plotBars(data, divId, width, height) {
         });
 }
 
-function plotCalendar(dateText,monthText, divId, width){
+function plotCalendar(dayText,monthText){
     // var parseTime = d3.timeParse("%e %B"),
-    //     date = parseTime(dateText + " " + monthText);
+    //     date = parseTime(dayText + " " + monthText);
     // console.log(date);
 
     // Construct 28 day grid
@@ -160,12 +163,12 @@ function plotCalendar(dateText,monthText, divId, width){
         .text(function (d) { return d; });
 
     // Only show the specified date
-    d3.select("#day-" + dateText).attr("visibility","visible");
+    d3.select("#day-" + dayText).attr("visibility","visible");
     
-    if (dateText == "29" || dateText == "30" || dateText == "31") {
+    if (dayText == "29" || dayText == "30" || dayText == "31") {
         // Show last day in month as that date
         d3.select("#day-28").attr("visibility", "visible");
-        d3.select("#day-28").select("text").text(dateText);
+        d3.select("#day-28").select("text").text(dayText);
     }
 }
 
