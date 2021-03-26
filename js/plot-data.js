@@ -6,8 +6,12 @@
 // circle.data([32, 57, 112]);
 // circle.attr("r", function (d) { return Math.sqrt(d); });
 
+var labelData = []
 
 function plotBars(data, divId, width, height) {
+    console.log(data)
+    // Reset div
+    d3.select(divId).selectAll("*").remove();
     // https://datawanderings.com/2019/10/20/tutorial-advanced-bar-chart-in-d3-js-v-5/
     // Init SVG
     var margin = 5;
@@ -135,4 +139,31 @@ function plotCalendar(dateText,monthText, divId, width){
         d3.select("#day-28").select("text").text(dateText);
     }
 
+function highlightNumbers(divId) {
+    // Get text from editable div.
+    var text = document.getElementById(divId).innerHTML
+    // Regex to get an array of all numbers in text.
+    nums = text.match(/\d+/g)
+    console.log(nums)
+    // Replace numbers on a copy of text.
+    var newtext = text
+    var i = 0
+    while (i < nums.length) {
+        // Replace number in text with a button with the same label.
+        numberButton = `<input type="button" value="${nums[i]}" onclick="addData(${nums[i]})">`
+        newtext = newtext.replace(nums[i], numberButton)
+        i++
+    }
+    // Update text div.
+    document.getElementById(divId).innerHTML = newtext
 }
+
+function addData(value) {
+    // Add data
+    labelData.push(
+        {
+            label: value,
+            val: value
+        }
+    )
+}}
