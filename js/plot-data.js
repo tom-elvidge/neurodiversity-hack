@@ -7,9 +7,7 @@
 // circle.attr("r", function (d) { return Math.sqrt(d); });
 
 // Global variables to store values from note text.
-var nums = []
-var dates = []
-var money = []
+var calendarId = 0;
 
 function updateValues(text) {
     // Plot all the dates.
@@ -106,6 +104,7 @@ function plotCalendar(dayText,monthText){
     var height = daySquareLength * spacing * 5 + borderGapOutside/2;
     var svg = d3.select("body")
         .append("svg")
+        .attr("id","cal-"+calendarId)
         .attr("width", width)
         .attr("height", height);
     
@@ -170,6 +169,7 @@ function plotCalendar(dayText,monthText){
         d3.select("#day-28").attr("visibility", "visible");
         d3.select("#day-28").select("text").text(dayText);
     }
+    calendarId++;
 }
 
 // function highlightNumbers(divId) {
