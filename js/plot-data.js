@@ -87,13 +87,16 @@ function plotBars(data, divId, width, height) {
         });
 }
 
-function plotCalendar(dayText,monthText,monthNumber){
+function plotCalendar(dayText,monthString,monthNumber){
     // var parseTime = d3.timeParse("%e %B"),
     //     date = parseTime(dayText + " " + monthText);
     // console.log(date);
+    var shortDictLookup = {jan:"January", feb: "February" ,mar:"March",apr:"April",may:"May",jun:"June",jul:"July",aug:"August",sept:"September",oct:"October",nov:"November",dec:"December"};
     var monthLookup = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    if (monthText === null) {
+    if (monthString === null) {
         var monthText = monthLookup[monthNumber-1];        
+    } else {
+        var monthText = shortDictLookup[monthString];
     }
 
     // Construct 28 day grid
