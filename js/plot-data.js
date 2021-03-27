@@ -108,7 +108,7 @@ function plotCalendar(dayText,monthText){
         .attr("width", width)
         .attr("height", height);
     
-    var border = svg.append("g")
+    let border = svg.append("g")
         .attr("id","calendar-border");
     
     border.append("text")
@@ -133,11 +133,11 @@ function plotCalendar(dayText,monthText){
         .attr("class", "date-line")
         .attr("transform", "translate("+borderGapOutside/2+"," + daySquareLength + ")");
     
-    var dateDisplay = border.append("g")
+    let dateDisplay = border.append("g")
         .attr("class","date-display")
         .attr("transform","translate("+borderGapOutside/2+","+daySquareLength+")" );
 
-    var dateSquareGroups = dateDisplay.selectAll("g")
+    let dateSquareGroups = dateDisplay.selectAll("g")
         .data(dates)
         .enter()
         .append("g")
@@ -162,7 +162,7 @@ function plotCalendar(dayText,monthText){
         .text(function (d) { return d; });
 
     // Only show the specified date
-    d3.select("#day-" + dayText).attr("visibility","visible");
+    d3.select("#cal-" + calendarId).select("#day-" + dayText).attr("visibility","visible");
     
     if (dayText == "29" || dayText == "30" || dayText == "31") {
         // Show last day in month as that date
