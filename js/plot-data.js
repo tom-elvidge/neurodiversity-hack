@@ -104,10 +104,11 @@ function plotCalendar(dayText,monthText){
         width = daySquareLength * spacing * 7 + borderGapOutside;
 
     var height = daySquareLength * spacing * 5 + borderGapOutside/2;
-    var svg = d3.select("body")
+    var svg = d3.select("#yeet")
         .append("svg")
         .attr("width", width)
-        .attr("height", height);
+        .attr("height", height)
+        .attr("id", "calendar-bongtainer");
     
     var border = svg.append("g")
         .attr("id","calendar-border");

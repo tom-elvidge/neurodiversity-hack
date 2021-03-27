@@ -17,3 +17,7 @@ svg text {
 .month {
     fill: black;
 }
+
+#calendar-bongtainer {
+    margin: 1rem;
+}
