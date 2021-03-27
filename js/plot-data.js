@@ -114,7 +114,7 @@ function plotCalendar(dayText,monthString,monthNumber){
         .attr("id","cal-"+calendarId)
         .attr("width", width)
         .attr("height", height)
-        .attr("id", "calendar-bongtainer");
+        .attr("class", "calendar-bongtainer");
     
     let border = svg.append("g")
         .attr("id","calendar-border");
