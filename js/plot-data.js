@@ -21,7 +21,7 @@ function updateValues(text) {
     let r2 = text.matchAll(/(?<day>\d+)\/(?<month>\d+)\/(?<year>\d+)/gi);
     for (let result of r2) {
         let { day, month } = result.groups;
-        plotCalendar(day, month);
+        plotCalendar(day,null, month);
     }
 
     // Plot all the nums.
@@ -87,10 +87,14 @@ function plotBars(data, divId, width, height) {
         });
 }
 
-function plotCalendar(dayText,monthText){
+function plotCalendar(dayText,monthText,monthNumber){
     // var parseTime = d3.timeParse("%e %B"),
     //     date = parseTime(dayText + " " + monthText);
     // console.log(date);
+    var monthLookup = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    if (monthText === null) {
+        var monthText = monthLookup[monthNumber-1];        
+    }
 
     // Construct 28 day grid
     var dates = Array.from({ length: 28 }, (x, i) => i+1);
